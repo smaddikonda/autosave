@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  font-size: 18px;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+.font-main {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-accent {
+  font-family: 'Zilla Slab', serif;
+}
+
+.fm {
+  font-weight: 500;
+}
+
+.fb {
+  font-weight: 700;
+}
+
+/*MEDIA QUERIES*/
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  html {
+    font-size: 18px !important;
+  }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  html {
+    font-size: 18.5px !important;
+  }
+
+  .section-description {
+    max-width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  html {
+    font-size: 19px !important;
+  }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  html {
+    font-size: 20px !important;
+  }
+}
