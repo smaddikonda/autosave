@@ -20,6 +20,12 @@ html {
   font-weight: 700;
 }
 
+.outer-flex-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /*MEDIA QUERIES*/
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
@@ -32,12 +38,6 @@ html {
 @media (min-width: 768px) {
   html {
     font-size: 18.5px !important;
-  }
-
-  .section-description {
-    max-width: 65%;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 

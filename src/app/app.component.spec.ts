@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'autosave'`, () => {
+  it(`should have as title 'coronatimes'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('autosave');
+    expect(app.title).toEqual('coronatimes');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('autosave app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('coronatimes app is running!');
   });
 });

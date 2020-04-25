@@ -1,0 +1,23 @@
+#loginContainer {
+  background-color: rgba(213, 236, 255, 0.2);
+}
+
+#inner {
+  min-height: 90vh;
+}
+
+#disclosureBtn {
+  font-size: 0.8rem !important;
+  padding: 1px 5px 1px 5px;
+}
+
+#formSection {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  #formSection {
+    max-width: 60%;
+  }
+}

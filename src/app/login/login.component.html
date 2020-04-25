@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div id="loginContainer">
+  <div id="inner" class="container pt-5 text-center outer-flex-div">
+    <h4>Welcome to the <b>{{appName}}</b> app!</h4>
+    <p>A simple web app for users to share their experiences with the cornavirus pandemic.</p>
+
+    <section>
+      <div id="disclosureBtn" class="small btn fb btn-outline-danger">Full disclosure</div>
+    </section>
+
+    <section id="formSection">
+      <form class="text-center p-4 border-" action="#!">
+        <div class="h5 mb-4">Sign in</div>
+        <input type="text" name="username" id="loginUsername" class="form-control mb-3" placeholder="Username">
+        <input type="password" id="defaultLoginFormPassword" class="form-control mb-3" placeholder="Password">
+        <button class="btn btn-primary btn-block my-4" type="submit">Sign in</button>
+        <div>Not a member?
+          <a href="">Register</a>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
