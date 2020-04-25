@@ -1,15 +1,28 @@
 <div class="container pt-5 pb-5">
   <div id="coronatimesForm" class="mb-5">
 
-    <div class="alert alert-danger">
-      <div class="alert-heading fb">⚠ Full disclosure:</div>
-      <div class="white-space-pre-line" [innerHTML]="fullDisclosure"></div>
+    <div>
+      <a id="disclosureId" class="btn" data-toggle="collapse" href="#disclosureCollapse" role="button"
+         aria-expanded="false">
+        ⚠ <u>Full disclosure</u>
+      </a>
+      <div class="collapse" id="disclosureCollapse">
+        <div class="alert alert-danger white-space-pre-line" [innerHTML]="fullDisclosure"></div>
+      </div>
     </div>
-    <div class="alert alert-primary mb-5">
-      <div class="alert-heading fb">📝 How to use this form:</div>
-      <div class="white-space-pre-line" [innerHTML]="welcomeMessage"></div>
+
+    <div>
+      <a id="welcomeId" class="btn" data-toggle="collapse" href="#welcomeCollapse" role="button"
+         aria-expanded="false">
+        📝 <u>How to use this form</u>
+      </a>
+      <div class="collapse" id="welcomeCollapse">
+        <div class="alert alert-primary white-space-pre-line" [innerHTML]="welcomeMessage"></div>
+      </div>
     </div>
+
     <hr class="mb-5">
+    <div class="h4 text-center mb-5">Share your story</div>
 
     <form>
       <div class="form-group">
@@ -33,11 +46,13 @@
         <textarea class="form-control" id="precautionInfected" rows="3"></textarea>
       </div>
       <div class="form-group">
-        <label for="precautionsSpreading">What precautions are you taking to avoid spreading or being a carrier of the coronavirus?</label>
+        <label for="precautionsSpreading">What precautions are you taking to avoid spreading or being a carrier of the
+          coronavirus?</label>
         <textarea class="form-control" id="precautionsSpreading" rows="3"></textarea>
       </div>
       <div class="form-group">
-        <label for="wfhproductivity">On a scale of 1-5, how productive are you working from home? (1 = least, 5 = most)</label>
+        <label for="wfhproductivity">On a scale of 1-5, how productive are you working from home? (1 = least, 5 =
+          most)</label>
         <select class="form-control" id="wfhproductivity">
           <option>1</option>
           <option>2</option>
