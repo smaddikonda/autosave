@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {APP_NAME, FULL_DISCLOSURE, WELCOME_MESSAGE} from '../utils/constants';
 
 @Component({
   selector: 'app-form',
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  appName: string;
+  welcomeMessage: string;
+  fullDisclosure: string;
 
-  constructor() { }
+  constructor() {
+    this.appName = APP_NAME;
+    this.welcomeMessage = WELCOME_MESSAGE;
+    this.fullDisclosure = FULL_DISCLOSURE;
+  }
 
   ngOnInit(): void {
   }

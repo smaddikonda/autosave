@@ -1,0 +1,34 @@
+#loginContainer {
+  min-height: 90vh;
+  background-color: rgba(213, 236, 255, 0.2) !important;
+}
+
+#homepicture {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 80%;
+}
+
+#disclosureBtn {
+  font-size: 0.8rem !important;
+  padding: 1px 5px 1px 5px;
+}
+
+#formSection {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.form-control, .btn {
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  #formSection {
+    max-width: 60%;
+  }
+
+  #homepicture {
+    max-width: 45%;
+  }
+}

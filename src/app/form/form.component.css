@@ -1,0 +1,17 @@
+div.white-space-pre-line {
+  white-space: pre-line;
+}
+
+textarea{
+  resize: none;
+}
+
+label {
+  font-weight: 500;
+}
+
+#disclosureId.btn:focus, #disclosureId.btn:hover, #welcomeId.btn:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
