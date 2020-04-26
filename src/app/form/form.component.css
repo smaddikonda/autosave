@@ -24,3 +24,7 @@ a {
 div.btn {
   padding-left: 0px;
 }
+
+div.form-group {
+  margin-top: 1.75rem !important;
+}

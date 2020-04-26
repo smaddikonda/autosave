@@ -40,42 +40,44 @@
     <hr class="mb-5">
     <div class="h4 text-center mb-5">Share your story</div>
 
-    <form>
-      <div class="form-group">
-        <label for="firstname">First name</label>
-        <input type="text" name="firstname" class="form-control" id="firstname">
-      </div>
-      <div class="form-group">
-        <label for="lastname">Last name</label>
-        <input type="text" name="lastname" class="form-control" id="lastname">
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+      <div class="row">
+        <div class="col col-sm-12 col-md-6 form-group">
+          <label for="firstname">First name</label>
+          <input type="text" name="firstname" class="form-control" id="firstname" formControlName="firstname">
+        </div>
+        <div class="col col-sm-12 col-md-6 form-group">
+          <label for="lastname">Last name</label>
+          <input type="text" name="lastname" class="form-control" id="lastname" formControlName="lastname">
+        </div>
       </div>
       <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email">
+        <input type="email" class="form-control" id="email" formControlName="email">
       </div>
       <div class="form-group">
         <label for="lifeChanger">How has the covid-19 pandemic affected your life?</label>
-        <textarea class="form-control" id="lifeChanger" rows="3"></textarea>
+        <textarea class="form-control" id="lifeChanger" rows="3" formControlName="affects"></textarea>
       </div>
       <div class="form-group">
-        <label for="precautionInfected">What precautions are you taking to avoid getting infected by covid-19?</label>
-        <textarea class="form-control" id="precautionInfected" rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="precautionsSpreading">What precautions are you taking to avoid spreading or being a carrier of the
-          coronavirus?</label>
-        <textarea class="form-control" id="precautionsSpreading" rows="3"></textarea>
+        <label for="precautionInfected">What precautions are you taking to avoid getting infected by COVID-19?</label>
+        <textarea class="form-control" id="precautionInfected" rows="3" formControlName="precautions"></textarea>
       </div>
       <div class="form-group">
         <label for="wfhproductivity">On a scale of 1-5, how productive are you working from home? (1 = least, 5 =
           most)</label>
-        <select class="form-control" id="wfhproductivity">
+        <select class="form-control" id="wfhproductivity" formControlName="wfhProductivity">
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="precautionsSpreading">Now that you are staying at home, how are you spending all the extra time
+          that you would otherwise spend on commuting to the workplace?</label>
+        <textarea class="form-control" id="precautionsSpreading" rows="3" formControlName="timeManagement"></textarea>
       </div>
       <button type="submit" class="btn btn-primary mt-5 mr-2">SUBMIT</button>
       <button type="submit" class="btn btn-primary mt-5 mr-2">SAVE AS DRAFT</button>
