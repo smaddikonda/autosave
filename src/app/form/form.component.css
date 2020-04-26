@@ -26,5 +26,10 @@ div.btn {
 }
 
 div.form-group {
-  margin-top: 1.75rem !important;
+  margin-bottom: 1.75rem !important;
+}
+
+.is-invalid {
+  border-color: red !important;
+  background-image: none !important;
 }
