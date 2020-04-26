@@ -1,5 +1,5 @@
-div.white-space-pre-line {
-  white-space: pre-line;
+#formHomeContainer {
+  background-color: rgba(213, 236, 255, 0.2);
 }
 
 textarea{
@@ -14,4 +14,13 @@ label {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+a {
+ text-decoration: none;
+  color: black;
+}
+
+div.btn {
+  padding-left: 0px;
 }

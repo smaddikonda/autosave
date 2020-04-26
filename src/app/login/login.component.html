@@ -1,22 +1,23 @@
 <div id="loginContainer">
   <div id="inner" class="container text-center pt-5 pb-5">
-    <img id="homepicture" src="../../assets/homepic.svg">
-    <h4 class="mt-4">Welcome to <b>{{appName}}</b>!</h4>
-    <p>A simple web app for users to share their experiences deaing with the cornavirus pandemic.</p>
+    <h5>These are tough times, but let's go through them together.</h5>
+    <img id="homepicture" class="mt-4" src="../../assets/homepic.svg">
+    <h2 class="mt-5"><b>{{appName}}</b></h2>
+    <div id="appDesc">A simple web-app for users to share their experiences dealing with the covid-19 pandemic.</div>
 
-    <section>
+    <section class="mt-3">
       <button id="disclosureBtn" class="small btn fb btn-outline-danger"
-           data-toggle="modal" data-target="#disclosureModal">Full disclosure</button>
+           data-toggle="modal" data-target="#disclosureModal">Disclaimer</button>
     </section>
 
     <section id="formSection">
       <form class="text-center p-4 border-" action="#!">
         <div class="h5 mb-4">Sign in</div>
-        <input type="text" name="username" id="loginUsername" class="form-control mb-3" placeholder="Username">
-        <input type="password" id="defaultLoginFormPassword" class="form-control mb-3" placeholder="Password">
-        <button class="btn btn-primary btn-block mt-3" type="submit">Sign in</button>
+        <input type="text" name="username" id="loginUsername" class="form-control" placeholder="Username">
+        <input type="password" id="defaultLoginFormPassword" class="form-control mt-2" placeholder="Password">
+        <button class="btn btn-primary mt-2" type="submit">Sign in</button>
         <div class="small mt-2"> Not a member?
-          <a href="">Register</a>
+          <a routerLink="/register">Sign up here.</a>
         </div>
       </form>
     </section>
@@ -32,13 +33,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body small text-justify">
-        <b>CoronaTimes</b> is an open-source web app built by me — Sai Maddikonda — as a personal/hobby project,
-        to experiment with enterprise architectural paradigms like microservices, cloud native development, containerization, orchestration, etc.<br><br>
-        The app is still under development and is currently being used for demonstrative purposes only, so some features might not work as expected.<br><br>
-        The privacy policy, security, and encryption aspects of the user data are still being worked on; <b>so please do
-        not share any confidential user data while using this application. I accept zero liability for your the abuse of your data privacy.</b>
-      </div>
+      <div class="modal-body small text-justify" [innerHTML]="disclosure"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

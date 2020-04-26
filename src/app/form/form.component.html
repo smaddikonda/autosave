@@ -1,23 +1,39 @@
-<div class="container pt-5 pb-5">
-  <div id="coronatimesForm" class="mb-5">
+<div id="formHomeContainer" class="pt-5 pb-5">
+  <div id="coronatimesForm" class="container mb-5">
 
     <div>
-      <a id="disclosureId" class="btn" data-toggle="collapse" href="#disclosureCollapse" role="button"
-         aria-expanded="false">
-        ⚠ <u>Full disclosure</u>
-      </a>
-      <div class="collapse" id="disclosureCollapse">
-        <div class="alert alert-danger white-space-pre-line" [innerHTML]="fullDisclosure"></div>
+      <div class="btn">
+        <a id="featureId" data-toggle="collapse" href="#featureCollapse" role="button"
+           aria-expanded="false">
+          ⚡ <u>A note on Auto-Save feature</u>
+        </a>
+      </div>
+      <div class="collapse" id="featureCollapse">
+        <div class="alert alert-success white-space-pre-line" [innerHTML]="engineeringHighlight"></div>
       </div>
     </div>
 
     <div>
-      <a id="welcomeId" class="btn" data-toggle="collapse" href="#welcomeCollapse" role="button"
-         aria-expanded="false">
-        📝 <u>How to use this form</u>
-      </a>
+      <div class="btn">
+        <a id="welcomeId" data-toggle="collapse" href="#welcomeCollapse" role="button"
+           aria-expanded="false">
+          📝 <u>How to use this form</u>
+        </a>
+      </div>
       <div class="collapse" id="welcomeCollapse">
         <div class="alert alert-primary white-space-pre-line" [innerHTML]="welcomeMessage"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="btn">
+        <a id="disclosureId" data-toggle="collapse" href="#disclosureCollapse" role="button"
+           aria-expanded="false">
+          ⚠ <u>Disclaimer</u>
+        </a>
+      </div>
+      <div class="collapse" id="disclosureCollapse">
+        <div class="alert alert-danger white-space-pre-line" [innerHTML]="fullDisclosure"></div>
       </div>
     </div>
 
