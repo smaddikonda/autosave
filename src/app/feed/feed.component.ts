@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MICROSERVICE_URL} from '../utils/constants';
+import {MICROSERVICE_FORM_BASE_URL} from '../utils/constants';
 import {FeedModel} from '../models/feed.model';
 
 @Component({
@@ -14,7 +14,7 @@ export class FeedComponent implements OnInit {
   feedBaseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.feedBaseUrl = MICROSERVICE_URL;
+    this.feedBaseUrl = MICROSERVICE_FORM_BASE_URL;
   }
 
   ngOnInit(): void {

@@ -3,14 +3,14 @@ import {
   APP_NAME,
   ENGINEERING_MESSAGE,
   FORM_DISCLAIMER,
-  MICROSERVICE_FORM_PUT_URL,
-  MICROSERVICE_URL,
+  MICROSERVICE_FORM_BASE_URL,
   WELCOME_MESSAGE
 } from '../utils/constants';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {Subscription, interval} from 'rxjs';
 import * as _ from 'lodash';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -28,18 +28,29 @@ export class FormComponent implements OnInit, OnDestroy {
   formErrorMessages: any;
   isDraftFormPresent = false;
   isAutoSavedFormPresent = false;
-  username: string;
+  isLoadedWithSavedForm = false;
   autoSaverSubscription: Subscription;
   private oldFormValue: any;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
-    this.username = 'smaddikonda';
+  autoSavedFromObject: any;
+
+  // API requirements, hardcoded for now.
+  USERNAME: string;
+  GET_AUTOSAVED_FORMS_FOR_USER: string;
+  PUT_AUTOSAVE_FORMS_FOR_USER: string;
+  DELETE_AUTOSAVE_FORMS_FOR_USER: string;
+
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
+    this.USERNAME = 'smaddikonda';
+    this.GET_AUTOSAVED_FORMS_FOR_USER = MICROSERVICE_FORM_BASE_URL + 'user/?username=' + this.USERNAME;
+    this.PUT_AUTOSAVE_FORMS_FOR_USER = MICROSERVICE_FORM_BASE_URL + 'user/?username=' + this.USERNAME;
+    this.DELETE_AUTOSAVE_FORMS_FOR_USER = MICROSERVICE_FORM_BASE_URL + 'user/?username=' + this.USERNAME;
   }
 
   ngOnDestroy(): void {
     const lastFormValue = this.form.value;
-    lastFormValue.username = this.username;
-    this.http.put(MICROSERVICE_FORM_PUT_URL + this.username, lastFormValue).subscribe((res) => {
+    lastFormValue.username = this.USERNAME;
+    this.http.put(this.PUT_AUTOSAVE_FORMS_FOR_USER, lastFormValue).subscribe((res) => {
       console.log('Logging the PUT response');
       console.dir(res);
     });
@@ -56,9 +67,26 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   private checkDraftForms() {
-    this.http.get(MICROSERVICE_URL).subscribe((date) => {
+  }
 
+  private checkAutoSavedForms() {
+    this.http.get(this.GET_AUTOSAVED_FORMS_FOR_USER).subscribe((data) => {
+      if (data && Array.isArray(data) && data.length !== 0) {
+        this.isAutoSavedFormPresent = true;
+        this.autoSavedFromObject = data[0];
+      }
     });
+  }
+
+  loadAutoSavedForm() {
+    this.form.get(this.formIdentifiers.firstname).setValue(this.autoSavedFromObject.firstname);
+    this.form.get(this.formIdentifiers.lastname).setValue(this.autoSavedFromObject.lastname);
+    this.form.get(this.formIdentifiers.email).setValue(this.autoSavedFromObject.email);
+    this.form.get(this.formIdentifiers.affects).setValue(this.autoSavedFromObject.affects);
+    this.form.get(this.formIdentifiers.precautions).setValue(this.autoSavedFromObject.precautions);
+    this.form.get(this.formIdentifiers.timeManagement).setValue(this.autoSavedFromObject.timeManagement);
+    this.form.get(this.formIdentifiers.wfhProductivity).setValue(this.autoSavedFromObject.wfhProductivity);
+    this.isLoadedWithSavedForm = true;
   }
 
   initConstants() {
@@ -113,8 +141,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   testSave() {
-    const formValue = this.form.value;
-    formValue.username = this.username;
+
   }
 
   initSubscriptions() {
@@ -123,13 +150,13 @@ export class FormComponent implements OnInit, OnDestroy {
       if (!this.form.dirty) {
         this.oldFormValue = this.form.value;
       }
-      // For is dirty, user has started filling the form.
+        // For is dirty, user has started filling the form.
       // Comapare new and old values for diff.
       else {
         newValue = this.form.value;
         if (!_.isEqual(this.oldFormValue, newValue)) {
-          newValue.username = this.username;
-          this.http.put(MICROSERVICE_FORM_PUT_URL + this.username, newValue).subscribe((res) => {
+          newValue.username = this.USERNAME;
+          this.http.put(this.PUT_AUTOSAVE_FORMS_FOR_USER, newValue).subscribe((res) => {
             console.log('Logging the PUT response');
             console.dir(res);
           });
@@ -175,6 +202,18 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   isTextareaLengthPermitted(formIdentifier): boolean {
-    return this.form.get(formIdentifier).value.length <= 2000;
+    const value = this.form.get(formIdentifier).value;
+    return value ? value.length <= 2000 : false;
+  }
+
+  exitForm() {
+    this.router.navigateByUrl('');
+  }
+
+  deleteAutoSavedForm() {
+    this.form.reset();
+    this.http.delete(this.DELETE_AUTOSAVE_FORMS_FOR_USER).subscribe((data) => {
+      console.log('Form data is deleted');
+    });
   }
 }
