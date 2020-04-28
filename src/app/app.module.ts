@@ -5,8 +5,9 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FieldErrorDisplayComponent } from './form/field-error-display/field-error-display.component';
+import {FieldErrorDisplayComponent} from './form/field-error-display/field-error-display.component';
 import {HttpClientModule} from '@angular/common/http';
+import { FeedElementComponent } from './feed/feed-element/feed-element.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {HttpClientModule} from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     routingComponents,
-    FieldErrorDisplayComponent
+    FieldErrorDisplayComponent,
+    FeedElementComponent
   ],
   imports: [
     BrowserModule,

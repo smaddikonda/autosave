@@ -37,102 +37,112 @@
       </div>
     </div>
 
-    <hr class="mb-5">
-    <div class="h4 text-center mb-5">Share your story</div>
+    <hr class="mt-5">
 
-    <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
-      <div class="row">
+    <div *ngIf="(isAutoSavedFormPresent || isDraftFormPresent) && !isLoadedWithSavedForm">
+      <button *ngIf="isDraftFormPresent" class="btn btn-primary mr-2">LOAD DRAFT FORM</button>
+      <button *ngIf="isAutoSavedFormPresent" class="btn btn-primary mr-2" (click)="loadAutoSavedForm()">LOAD AUTO-SAVED FORM</button>
+      <hr>
+    </div>
 
-        <div class="col col-sm-12 col-md-6 form-group">
-          <label for="firstname">First name</label>
-          <input type="text" name="firstname" class="form-control" id="firstname"
-                 [ngClass]="displayFieldCss('firstname')"
-                 formControlName="{{formIdentifiers.firstname}}">
+    <div *ngIf="!isAutoSavedFormPresent || isLoadedWithSavedForm">
+      <div class="h4 text-center mt-5 mb-5">Share your story</div>
+      <form [formGroup]="form">
+        <div class="row">
+
+          <div class="col col-sm-12 col-md-6 form-group">
+            <label for="firstname">First name</label>
+            <input type="text" name="firstname" class="form-control" id="firstname"
+                   [ngClass]="displayFieldCss('firstname')"
+                   formControlName="{{formIdentifiers.firstname}}">
+            <app-field-error-display
+              [displayError]="isFieldValid(formIdentifiers.firstname)"
+              [errorMsg]=formErrorMessages.firstname>
+            </app-field-error-display>
+          </div>
+
+          <div class="col col-sm-12 col-md-6 form-group">
+            <label for="lastname">Last name</label>
+            <input type="text" name="lastname" class="form-control" id="lastname"
+                   [ngClass]="displayFieldCss('lastname')"
+                   formControlName="{{formIdentifiers.lastname}}">
+            <app-field-error-display
+              [displayError]="isFieldValid(formIdentifiers.lastname)"
+              [errorMsg]=formErrorMessages.lastname>
+            </app-field-error-display>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email"
+                 [ngClass]="displayFieldCss('email')"
+                 formControlName="{{formIdentifiers.email}}">
           <app-field-error-display
-            [displayError]="isFieldValid(formIdentifiers.firstname)"
-            [errorMsg]=formErrorMessages.firstname>
+            [displayError]="isFieldValid(formIdentifiers.email)"
+            [errorMsg]=formErrorMessages.email>
           </app-field-error-display>
         </div>
 
-        <div class="col col-sm-12 col-md-6 form-group">
-          <label for="lastname">Last name</label>
-          <input type="text" name="lastname" class="form-control" id="lastname"
-                 [ngClass]="displayFieldCss('lastname')"
-                 formControlName="{{formIdentifiers.lastname}}">
+        <div class="form-group">
+          <label for="lifeChanger">How has the covid-19 pandemic affected your life?</label>
+          <textarea class="form-control" id="lifeChanger" rows="3"
+                    [ngClass]="displayFieldCss('affects')"
+                    formControlName="{{formIdentifiers.affects}}"></textarea>
           <app-field-error-display
-            [displayError]="isFieldValid(formIdentifiers.lastname)"
-            [errorMsg]=formErrorMessages.lastname>
+            [displayError]="isFieldValid(formIdentifiers.affects)"
+            [errorMsg]="isTextareaLengthPermitted(formIdentifiers.affects) ? formErrorMessages.affects : formErrorMessages.length">
           </app-field-error-display>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email"
-               [ngClass]="displayFieldCss('email')"
-               formControlName="{{formIdentifiers.email}}">
-        <app-field-error-display
-          [displayError]="isFieldValid(formIdentifiers.email)"
-          [errorMsg]=formErrorMessages.email>
-        </app-field-error-display>
-      </div>
+        <div class="form-group">
+          <label for="precautionInfected">What precautions are you taking to avoid getting infected by COVID-19?</label>
+          <textarea class="form-control" id="precautionInfected" rows="3"
+                    [ngClass]="displayFieldCss('precautions')"
+                    formControlName="{{formIdentifiers.precautions}}"></textarea>
+          <app-field-error-display
+            [displayError]="isFieldValid(formIdentifiers.precautions)"
+            [errorMsg]="isTextareaLengthPermitted(formIdentifiers.precautions) ? formErrorMessages.precautions : formErrorMessages.length">
+          </app-field-error-display>
+        </div>
 
-      <div class="form-group">
-        <label for="lifeChanger">How has the covid-19 pandemic affected your life?</label>
-        <textarea class="form-control" id="lifeChanger" rows="3"
-                  [ngClass]="displayFieldCss('affects')"
-                  formControlName="{{formIdentifiers.affects}}"></textarea>
-        <app-field-error-display
-          [displayError]="isFieldValid(formIdentifiers.affects)"
-          [errorMsg]=formErrorMessages.affects>
-        </app-field-error-display>
-      </div>
+        <div class="form-group">
+          <label for="wfhProductivity">On a scale of 1-5, how productive are you working from home? (1 = least, 5 =
+            most)</label>
+          <select class="form-control" id="wfhProductivity"
+                  [ngClass]="displayFieldCss('wfhProductivity')"
+                  formControlName="{{formIdentifiers.wfhProductivity}}">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <app-field-error-display
+            [displayError]="isFieldValid(formIdentifiers.wfhProductivity)"
+            [errorMsg]=formErrorMessages.wfhProductivity>
+          </app-field-error-display>
+        </div>
 
-      <div class="form-group">
-        <label for="precautionInfected">What precautions are you taking to avoid getting infected by COVID-19?</label>
-        <textarea class="form-control" id="precautionInfected" rows="3"
-                  [ngClass]="displayFieldCss('precautions')"
-                  formControlName="{{formIdentifiers.precautions}}"></textarea>
-        <app-field-error-display
-          [displayError]="isFieldValid(formIdentifiers.precautions)"
-          [errorMsg]=formErrorMessages.precautions>
-        </app-field-error-display>
-      </div>
+        <div class="form-group">
+          <label for="timeManagement">Now that you are staying at home, how are you spending all the extra time
+            that you would otherwise spend on commuting to the workplace?</label>
+          <textarea class="form-control" id="timeManagement" rows="3"
+                    [ngClass]="displayFieldCss('timeManagement')"
+                    formControlName="{{formIdentifiers.timeManagement}}"></textarea>
+          <app-field-error-display
+            [displayError]="isFieldValid(formIdentifiers.timeManagement)"
+            [errorMsg]="isTextareaLengthPermitted(formIdentifiers.timeManagement) ? formErrorMessages.timeManagement : formErrorMessages.length">
+          </app-field-error-display>
+        </div>
 
-      <div class="form-group">
-        <label for="wfhProductivity">On a scale of 1-5, how productive are you working from home? (1 = least, 5 =
-          most)</label>
-        <select class="form-control" id="wfhProductivity"
-                [ngClass]="displayFieldCss('wfhProductivity')"
-                formControlName="{{formIdentifiers.wfhProductivity}}">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <app-field-error-display
-          [displayError]="isFieldValid(formIdentifiers.wfhProductivity)"
-          [errorMsg]=formErrorMessages.wfhProductivity>
-        </app-field-error-display>
-      </div>
+        <button type="submit" class="btn btn-secondary mt-5 mr-2" (click)="onFormSubmit()">SUBMIT</button>
+        <button class="btn btn-secondary mt-5 mr-2" (click)="testSave()">SAVE AS DRAFT</button>
+        <button class="btn btn-primary mt-5 mr-2" (click)="exitForm()">EXIT</button>
+        <button class="btn btn-primary mt-5" (click)="deleteAutoSavedForm()">DELETE</button>
+      </form>
+    </div>
 
-      <div class="form-group">
-        <label for="timeManagement">Now that you are staying at home, how are you spending all the extra time
-          that you would otherwise spend on commuting to the workplace?</label>
-        <textarea class="form-control" id="timeManagement" rows="3"
-                  [ngClass]="displayFieldCss('timeManagement')"
-                  formControlName="{{formIdentifiers.timeManagement}}"></textarea>
-        <app-field-error-display
-          [displayError]="isFieldValid(formIdentifiers.timeManagement)"
-          [errorMsg]=formErrorMessages.timeManagement>
-        </app-field-error-display>
-      </div>
-
-      <button type="submit" class="btn btn-primary mt-5 mr-2">SUBMIT</button>
-      <button type="submit" class="btn btn-primary mt-5 mr-2">SAVE AS DRAFT</button>
-      <button type="submit" class="btn btn-primary mt-5">EXIT</button>
-    </form>
   </div>
 
 </div>

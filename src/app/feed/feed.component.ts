@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MICROSERVICE_FORM_BASE_URL} from '../utils/constants';
+import {FeedModel} from '../models/feed.model';
 
 @Component({
   selector: 'app-feed',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  feed: FeedModel[];
+  feedBaseUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.feedBaseUrl = MICROSERVICE_FORM_BASE_URL;
+  }
 
   ngOnInit(): void {
+    this.initializeFeed();
+  }
+
+  initializeFeed() {
+    this.http.get(this.feedBaseUrl).subscribe((data: FeedModel[]) => {
+      this.feed = data;
+      console.dir(data);
+    });
   }
 
 }
