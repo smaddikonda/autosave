@@ -50,9 +50,18 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     const lastFormValue = this.form.value;
     lastFormValue.username = this.USERNAME;
-    this.http.put(this.PUT_AUTOSAVE_FORMS_FOR_USER, lastFormValue).subscribe((res) => {
-      console.log('Logging the PUT response');
-      console.dir(res);
+    if (this.isFormBlank()) {
+      this.http.put(this.PUT_AUTOSAVE_FORMS_FOR_USER, lastFormValue).subscribe((res) => {
+        console.log('Logging the PUT response');
+        console.dir(res);
+      });
+    }
+  }
+
+  private isFormBlank(): boolean {
+    const fields = Object.keys(this.form.controls);
+    return fields.some((val, index, fieldsArr) => {
+      return this.form.get(val).value;
     });
   }
 
@@ -62,11 +71,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.initFormIds();
     this.buildForm();
     this.initSubscriptions();
-    this.checkDraftForms();
     this.checkAutoSavedForms();
-  }
-
-  private checkDraftForms() {
   }
 
   private checkAutoSavedForms() {
@@ -79,13 +84,10 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   loadAutoSavedForm() {
-    this.form.get(this.formIdentifiers.firstname).setValue(this.autoSavedFromObject.firstname);
-    this.form.get(this.formIdentifiers.lastname).setValue(this.autoSavedFromObject.lastname);
-    this.form.get(this.formIdentifiers.email).setValue(this.autoSavedFromObject.email);
-    this.form.get(this.formIdentifiers.affects).setValue(this.autoSavedFromObject.affects);
-    this.form.get(this.formIdentifiers.precautions).setValue(this.autoSavedFromObject.precautions);
-    this.form.get(this.formIdentifiers.timeManagement).setValue(this.autoSavedFromObject.timeManagement);
-    this.form.get(this.formIdentifiers.wfhProductivity).setValue(this.autoSavedFromObject.wfhProductivity);
+    const fields = Object.keys(this.form.controls);
+    fields.forEach((field) => {
+      this.form.get(field).setValue(this.autoSavedFromObject[field]);
+    });
     this.isLoadedWithSavedForm = true;
   }
 
@@ -140,9 +142,7 @@ export class FormComponent implements OnInit, OnDestroy {
     });
   }
 
-  testSave() {
-
-  }
+  testSave() {}
 
   initSubscriptions() {
     this.autoSaverSubscription = interval(5000).subscribe((callCount) => {
@@ -150,7 +150,7 @@ export class FormComponent implements OnInit, OnDestroy {
       if (!this.form.dirty) {
         this.oldFormValue = this.form.value;
       }
-        // For is dirty, user has started filling the form.
+      // For is dirty, user has started filling the form.
       // Comapare new and old values for diff.
       else {
         newValue = this.form.value;
