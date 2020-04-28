@@ -1,1 +1,9 @@
-<p>feed works!</p>
+<div id="feedContainer" class="pt-5 pb-5">
+  <div class="container mb-5">
+    <div class="h4 text-center mb-5">Read stories</div>
+
+    <div *ngFor="let feedElement of feed">
+      <app-feed-element [feedData]="feedElement"></app-feed-element>
+    </div>
+  </div>
+</div>

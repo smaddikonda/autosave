@@ -1,5 +1,5 @@
 #formHomeContainer {
-  background-color: rgba(213, 236, 255, 0.2);
+  background-color: rgba(213, 236, 255, 0.2) !important;
 }
 
 textarea{

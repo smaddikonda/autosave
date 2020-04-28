@@ -37,8 +37,15 @@
       </div>
     </div>
 
-    <hr class="mb-5">
-    <div class="h4 text-center mb-5">Share your story</div>
+    <hr class="mt-5">
+
+    <div *ngIf="isAutoSavedFormPresent || isDraftFormPresent">
+      <button *ngIf="isDraftFormPresent" class="btn btn-primary mr-2">LOAD DRAFT FORM</button>
+      <button *ngIf="isAutoSavedFormPresent" class="btn btn-primary mr-2">LOAD AUTO-SAVED FORM</button>
+      <hr>
+    </div>
+
+    <div class="h4 text-center mt-5 mb-5">Share your story</div>
 
     <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
       <div class="row">
@@ -84,7 +91,7 @@
                   formControlName="{{formIdentifiers.affects}}"></textarea>
         <app-field-error-display
           [displayError]="isFieldValid(formIdentifiers.affects)"
-          [errorMsg]=formErrorMessages.affects>
+          [errorMsg]="isTextareaLengthPermitted(formIdentifiers.affects) ? formErrorMessages.affects : formErrorMessages.length">
         </app-field-error-display>
       </div>
 
@@ -95,7 +102,7 @@
                   formControlName="{{formIdentifiers.precautions}}"></textarea>
         <app-field-error-display
           [displayError]="isFieldValid(formIdentifiers.precautions)"
-          [errorMsg]=formErrorMessages.precautions>
+          [errorMsg]="isTextareaLengthPermitted(formIdentifiers.precautions) ? formErrorMessages.precautions : formErrorMessages.length">
         </app-field-error-display>
       </div>
 
@@ -125,12 +132,12 @@
                   formControlName="{{formIdentifiers.timeManagement}}"></textarea>
         <app-field-error-display
           [displayError]="isFieldValid(formIdentifiers.timeManagement)"
-          [errorMsg]=formErrorMessages.timeManagement>
+          [errorMsg]="isTextareaLengthPermitted(formIdentifiers.timeManagement) ? formErrorMessages.timeManagement : formErrorMessages.length">
         </app-field-error-display>
       </div>
 
       <button type="submit" class="btn btn-primary mt-5 mr-2">SUBMIT</button>
-      <button type="submit" class="btn btn-primary mt-5 mr-2">SAVE AS DRAFT</button>
+      <button class="btn btn-primary mt-5 mr-2" (click)="testSave()">SAVE AS DRAFT</button>
       <button type="submit" class="btn btn-primary mt-5">EXIT</button>
     </form>
   </div>
