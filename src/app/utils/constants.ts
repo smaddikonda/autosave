@@ -1,4 +1,4 @@
-export const APP_NAME = 'CoronaTimes'
+export const APP_NAME = 'CoronaTimes';
 
 export const WELCOME_MESSAGE = 'Please fill out this form and let us know how you are surviving the pandemic.\n' +
   'By clicking an appropriate button on this page, you can:\n' +
@@ -23,7 +23,7 @@ export const HOME_DISCLOSURE = '<b>CoronaTimes</b> is an open-source web app bui
 export const ENGINEERING_MESSAGE = 'The main engineering feature being experimented with on this page ' +
   'is the <b>Auto-Save Form</b> feature.';
 
-export const HOST = 'http://192.168.99.100';
-// export const HOST = 'http://localhost';
+// export const HOST = 'http://192.168.99.100';
+export const HOST = 'http://localhost';
 
 export const MICROSERVICE_FORM_BASE_URL = HOST + ':3000/api/forms/';
